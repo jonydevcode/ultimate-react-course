@@ -142,3 +142,43 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+const book = getBook(2);
+const { title, author } = book; // object destructuring, equivalent to title = book.title
+console.log(title, author);
+const { genres } = book;
+
+console.log(genres);
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
+console.log(primaryGenre, secondaryGenre);
+console.log(otherGenres);
+
+function myTag(strings, ...values) {
+  let str = "";
+  strings.forEach((string, i) => {
+    str += string + (values[i] || "");
+  });
+  return str.toUpperCase();
+}
+
+const arg1 = "Alice";
+const arg2 = "Bob";
+const result = myTag`Hello ${(arg1, arg2)}!`;
+console.log(result); // Output: HELLO ALICE!
+
+fetch("https://ipinfo.io/json");
+// .then((res) => res.json())
+// .then((data) => console.log(data));
+
+async function getIp() {
+  const res = await fetch("https://ipinfo.io/json");
+  const data = await res.json();
+  console.log(data);
+
+  return data.city;
+}
+
+const city = getIp();
+console.log(city);
+
+console.log("HEY");
